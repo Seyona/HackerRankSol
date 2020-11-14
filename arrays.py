@@ -74,6 +74,3 @@ def arrayManipulation(n, queries):
             maxv = runningTotal
 
     return maxv
-
-
-print(arrayManipulation(4,[[2,3,603],[1,1,286],[4,4,882]]))
