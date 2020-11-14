@@ -35,3 +35,23 @@ def twoStrings(s1, s2):
         return "YES"
 
     return "NO"
+
+
+# Problem: Sherlock and Anagrams
+# https://www.hackerrank.com/challenges/sherlock-and-anagrams/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dictionaries-hashmaps
+from collections import Counter # not best practice to put an import here, but makes it easier to see what I am using for a given problem
+
+
+def sherlockAndAnagrams(s):
+    buckets = {}
+    length = len(s)
+    for i in range(length):
+        for j in range(1, length - i + 1):
+            key = frozenset(Counter(s[i:i + j]).items()) # Sets can't be hashed use frozen set.
+            buckets[key] = buckets.get(key, 0) + 1
+
+    anagrams = 0
+    for key in buckets:
+        anagrams += buckets[key] * (buckets[key] - 1) // 2
+
+    return anagrams
