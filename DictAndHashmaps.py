@@ -89,3 +89,48 @@ def countTriplets(arr, r):
         tripDict[i] = tripDict.get(i, 0) + 1
 
     return triplets
+
+
+# Problem: Frequency Queries
+# https://www.hackerrank.com/challenges/frequency-queries/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dictionaries-hashmaps&h_r=next-challenge&h_v=zen
+def freqQuery(queries):
+    buckets = {}
+    outArr = []
+
+    for x in queries:
+        operation = x[0]
+        if operation == 1:
+            buckets[x[1]] = buckets.get(x[1], 0) + 1
+        elif operation == 2:
+            buckets[x[1]] = buckets.get(x[1], 0) - 1
+            if buckets[x[1]] <= 0:
+                buckets.pop(x[1])
+        else:
+            if x[1] >= 10**6: # Max Frequency is 10^6, if the freq is higher than that it can't exist (0), Test 11 times out without this
+                outArr.append(0)
+            elif x[1] in frozenset(buckets.values()):
+                outArr.append(1)
+            else:
+                outArr.append(0)
+    return outArr
+
+freqQuery([[1, 3],
+[1, 38],
+[2, 1],
+[1, 16],
+[2, 1],
+[2, 2],
+[1, 64],
+[1, 84],
+[3, 1],
+[1, 100],
+[1, 10],
+[2, 2],
+[2, 1],
+[1, 67],
+[2, 2],
+[3, 1],
+[1, 99],
+[1, 32],
+[1, 58],
+[3, 2]])
